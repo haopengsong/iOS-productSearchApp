@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4443F905226FFF01004F5A84 /* ButtonStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4443F904226FFF01004F5A84 /* ButtonStatusModel.swift */; };
+		4443F907227026A0004F5A84 /* userInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4443F906227026A0004F5A84 /* userInput.swift */; };
+		4443F90922705418004F5A84 /* productViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4443F90822705418004F5A84 /* productViewController.swift */; };
 		44DA9182226853E300CC4BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA9181226853E300CC4BEA /* AppDelegate.swift */; };
 		44DA9184226853E300CC4BEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA9183226853E300CC4BEA /* ViewController.swift */; };
 		44DA9187226853E300CC4BEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44DA9185226853E300CC4BEA /* Main.storyboard */; };
 		44DA9189226853E400CC4BEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44DA9188226853E400CC4BEA /* Assets.xcassets */; };
 		44DA918C226853E400CC4BEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44DA918A226853E400CC4BEA /* LaunchScreen.storyboard */; };
+		71AC54EAF14A7A8AEC4067DA /* Pods_ebayProductSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CBB552F941705DAFD42EDA /* Pods_ebayProductSearch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		096C9517DA89D2A4D945D99B /* Pods-ebayProductSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ebayProductSearch.debug.xcconfig"; path = "Target Support Files/Pods-ebayProductSearch/Pods-ebayProductSearch.debug.xcconfig"; sourceTree = "<group>"; };
+		4443F904226FFF01004F5A84 /* ButtonStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStatusModel.swift; sourceTree = "<group>"; };
+		4443F906227026A0004F5A84 /* userInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInput.swift; sourceTree = "<group>"; };
+		4443F90822705418004F5A84 /* productViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productViewController.swift; sourceTree = "<group>"; };
 		44DA917E226853E300CC4BEA /* ebayProductSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ebayProductSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44DA9181226853E300CC4BEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44DA9183226853E300CC4BEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +30,8 @@
 		44DA9188226853E400CC4BEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44DA918B226853E400CC4BEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44DA918D226853E400CC4BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6215FE0AC2DE4609C27717A0 /* Pods-ebayProductSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ebayProductSearch.release.xcconfig"; path = "Target Support Files/Pods-ebayProductSearch/Pods-ebayProductSearch.release.xcconfig"; sourceTree = "<group>"; };
+		76CBB552F941705DAFD42EDA /* Pods_ebayProductSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ebayProductSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71AC54EAF14A7A8AEC4067DA /* Pods_ebayProductSearch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +51,8 @@
 			children = (
 				44DA9180226853E300CC4BEA /* ebayProductSearch */,
 				44DA917F226853E300CC4BEA /* Products */,
+				8ACEA3D5C6CE7FDD2B76A100 /* Pods */,
+				E93314A72924CE72C39D9A10 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +67,66 @@
 		44DA9180226853E300CC4BEA /* ebayProductSearch */ = {
 			isa = PBXGroup;
 			children = (
-				44DA9181226853E300CC4BEA /* AppDelegate.swift */,
-				44DA9183226853E300CC4BEA /* ViewController.swift */,
-				44DA9185226853E300CC4BEA /* Main.storyboard */,
-				44DA9188226853E400CC4BEA /* Assets.xcassets */,
-				44DA918A226853E400CC4BEA /* LaunchScreen.storyboard */,
-				44DA918D226853E400CC4BEA /* Info.plist */,
+				44DA91962268618800CC4BEA /* Support Files */,
+				44DA919522685EC600CC4BEA /* Controller */,
+				44DA919422685EC100CC4BEA /* View */,
+				44DA919322685EB600CC4BEA /* Model */,
 			);
 			path = ebayProductSearch;
+			sourceTree = "<group>";
+		};
+		44DA919322685EB600CC4BEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4443F904226FFF01004F5A84 /* ButtonStatusModel.swift */,
+				4443F906227026A0004F5A84 /* userInput.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		44DA919422685EC100CC4BEA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				44DA9185226853E300CC4BEA /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		44DA919522685EC600CC4BEA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				44DA9181226853E300CC4BEA /* AppDelegate.swift */,
+				44DA9183226853E300CC4BEA /* ViewController.swift */,
+				4443F90822705418004F5A84 /* productViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		44DA91962268618800CC4BEA /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				44DA918D226853E400CC4BEA /* Info.plist */,
+				44DA9188226853E400CC4BEA /* Assets.xcassets */,
+				44DA918A226853E400CC4BEA /* LaunchScreen.storyboard */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		8ACEA3D5C6CE7FDD2B76A100 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				096C9517DA89D2A4D945D99B /* Pods-ebayProductSearch.debug.xcconfig */,
+				6215FE0AC2DE4609C27717A0 /* Pods-ebayProductSearch.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E93314A72924CE72C39D9A10 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				76CBB552F941705DAFD42EDA /* Pods_ebayProductSearch.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +136,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 44DA9190226853E400CC4BEA /* Build configuration list for PBXNativeTarget "ebayProductSearch" */;
 			buildPhases = (
+				A427D6ACF8128DC0A5C96533 /* [CP] Check Pods Manifest.lock */,
 				44DA917A226853E300CC4BEA /* Sources */,
 				44DA917B226853E300CC4BEA /* Frameworks */,
 				44DA917C226853E300CC4BEA /* Resources */,
+				41E8196492BBA9A5DD635D9B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,13 +197,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		41E8196492BBA9A5DD635D9B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ebayProductSearch/Pods-ebayProductSearch-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/McPicker/McPicker.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/McPicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ebayProductSearch/Pods-ebayProductSearch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A427D6ACF8128DC0A5C96533 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ebayProductSearch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		44DA917A226853E300CC4BEA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4443F90922705418004F5A84 /* productViewController.swift in Sources */,
 				44DA9184226853E300CC4BEA /* ViewController.swift in Sources */,
+				4443F907227026A0004F5A84 /* userInput.swift in Sources */,
 				44DA9182226853E300CC4BEA /* AppDelegate.swift in Sources */,
+				4443F905226FFF01004F5A84 /* ButtonStatusModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,11 +405,12 @@
 		};
 		44DA9191226853E400CC4BEA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 096C9517DA89D2A4D945D99B /* Pods-ebayProductSearch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V78G7K5B2;
-				INFOPLIST_FILE = ebayProductSearch/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ebayProductSearch/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -298,11 +424,12 @@
 		};
 		44DA9192226853E400CC4BEA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6215FE0AC2DE4609C27717A0 /* Pods-ebayProductSearch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V78G7K5B2;
-				INFOPLIST_FILE = ebayProductSearch/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ebayProductSearch/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

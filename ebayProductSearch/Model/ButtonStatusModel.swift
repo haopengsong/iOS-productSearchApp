@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 
-class ConditionButtonStatusModel {
+class ButtonStatusModel {
     var newChecked: Int = 0
     var usedChecked: Int = 0
     var unspecChecked: Int = 0
+    var pickupChecked: Int = 0
+    var freeShipping: Int = 0
 }

@@ -7,3 +7,14 @@
 //
 
 import Foundation
+import UIKit
+
+class userInput {
+    var keyword: String = ""
+    var category: String = ""
+    
+    var buttonStatus = ButtonStatusModel()
+    
+    var distance: Int = 0
+    var zipcode: String = ""
+}
