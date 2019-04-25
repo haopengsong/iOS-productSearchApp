@@ -11,6 +11,7 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 import McPicker
+import Toast_Swift
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     //? -> optional
@@ -32,6 +33,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var clearButton: UIButton!
+    
+    
+    @IBOutlet weak var condNew: UIButton!
+    @IBOutlet weak var condUsed: UIButton!
+    @IBOutlet weak var condUnspec: UIButton!
+    
+    @IBOutlet weak var shipPickup: UIButton!
+    @IBOutlet weak var shipFree: UIButton!
+    
+    @IBOutlet weak var locationSwitch: UISwitch!
     
     var zipcode: String = ""
     
@@ -88,11 +99,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         zipcodeField.delegate = self
         zipcodeField.addTarget(self, action: #selector(searchRecords(_ :)), for: .editingChanged)
         
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
-        tap.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tap)
+        let tapZipCode = UITapGestureRecognizer(target: self, action: #selector(tapZipcodeFromTable))
+        tapZipCode.cancelsTouchesInView = false
+        tbZipcode.addGestureRecognizer(tapZipCode)
+        
+        let tapAwayFromView = UITapGestureRecognizer(target: self, action: #selector(tapAwayFromZipcodeField))
+        //tapAwayFromView.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapAwayFromView)
     }
     
+    @objc func tapAwayFromZipcodeField() {
+        self.zipcodeField.endEditing(true)
+        self.tbZipcode.isHidden = true
+    }
+    
+    @objc func tapZipcodeFromTable() {
+        print("quiting zipcode text field")
+        self.zipcodeField.endEditing(true)
+    }
     //search for zipcode, call zipcode api
     @objc func searchRecords(_ textField: UITextField) {
         var zipPrefix = textField.text
@@ -113,6 +137,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                 }
                 self.tbZipcode.reloadData()
+                self.tbZipcode.isHidden = false
                 self.tbZipcode.frame.size.height = 150
             }
         }
@@ -134,20 +159,76 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell!
     }
     
-    @IBAction func searchFunc(_ sender: UIButton) {
-        print(sender.tag)
+    //didselected rows
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        print("selecting zipcode from tbzipcode")
+        self.tbZipcode.frame.size.height = 19
+        //userinput: zipcode
+        self.zipcodeField.text = self.zipList[indexPath.row]
+        self.tbZipcode.isHidden = true
     }
     
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        self.tbZipcode.isHidden = true
+//    }
+    
+    
+    //gether userinput data and prepare switching to product view
+    @IBAction func searchFunc(_ sender: UIButton) {
+        print("search")
+        if let keywordInput: String = keyWord.text {
+            //check keyword
+            let trimmedKeyword = keywordInput.trimmingCharacters(in: .whitespacesAndNewlines)
+            if trimmedKeyword == "" || trimmedKeyword.count == 0 {
+                self.view.makeToast("Keyword is Mandatory")
+            } else {
+                if locationSwitch.isOn {
+                    //check zipcode input
+                    if let zipcodeInput: String = zipcodeField.text {
+                        let trimmedZipcode = zipcodeInput.trimmingCharacters(in: .whitespacesAndNewlines)
+                        if trimmedZipcode == "" || trimmedZipcode.count == 0 {
+                            self.view.makeToast("Zipcode is Mandatory")
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    //clear the input fields / set to default
     @IBAction func clearFunc(_ sender: UIButton) {
-        print(sender.tag)
+        print("clear")
+        
+        keyWord.text = ""
+        self.userInputs.keyword = ""
+        
+        self.categoryTextField.text = ""
+        self.getCategory()
+        self.userInputs.category = ""
+    
+        condNew.setImage(UIImage(named: "unchecked"), for: .normal)
+        condUsed.setImage(UIImage(named: "unchecked"), for: .normal)
+        condUnspec.setImage(UIImage(named: "unchecked"), for: .normal)
+        shipFree.setImage(UIImage(named: "unchecked"), for: .normal)
+        shipPickup.setImage(UIImage(named: "unchecked"), for: .normal)
+        
+        self.distanceMiles.text = ""
+        
+        self.zipcodeField.text = ""
+        
     }
     
     //hide/show zipcode input field
     @IBAction func zipcodeInputField(_ sender: UISwitch) {
-        if sender.isOn {
+        print("location is on: ", String( locationSwitch.isOn ))
+        if locationSwitch.isOn {
             zipcodeField.isHidden = false
+            //locationSwitch.isOn = false
         } else {
             zipcodeField.isHidden = true
+            //locationSwitch.isOn = true
         }
     }
     
@@ -163,7 +244,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             response in
             if response.result.isSuccess {
                 let locationJSON: JSON = JSON(response.result.value!)
-                //userinput : zipcode from current location
+                //userinput: zipcode from current location
                 self.userInputs.zipcode = locationJSON["zip"].stringValue
                 print("successfully got location data : " + locationJSON["zip"].stringValue)
             }
@@ -176,6 +257,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         mcPicker.backgroundColor = .gray
         mcPicker.backgroundColorAlpha = 0.25
         categoryTextField.inputViewMcPicker = mcPicker
+        
         categoryTextField.doneHandler = { [weak categoryTextField] (selections) in
             categoryTextField?.text = selections[0]!
         }
@@ -183,7 +265,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             categoryTextField?.text = selections[componentThatChanged]!
             if let text: String = categoryTextField?.text {
                 print("selection : " + text)
-                //userinput : category selection
+                //userinput: category selection
                 self.userInputs.category = text
             }
         }
@@ -247,7 +329,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    
+
     
     //Write didFailWithError
     
