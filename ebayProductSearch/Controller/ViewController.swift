@@ -12,8 +12,9 @@ import Alamofire
 import SwiftyJSON
 import McPicker
 import Toast_Swift
+import SwiftSpinner
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, canReceive {
     //? -> optional
     //! -> always has a value
     //constants
@@ -72,7 +73,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //load user input with button selection
         //userinput
-        self.userInputs.buttonStatus = conditionButton
+        self.userInputs.buttonStatus = self.conditionButton
         
         //render UI
         self.getLocationZIPCODE()
@@ -182,20 +183,44 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let trimmedKeyword = keywordInput.trimmingCharacters(in: .whitespacesAndNewlines)
             if trimmedKeyword == "" || trimmedKeyword.count == 0 {
                 self.view.makeToast("Keyword is Mandatory")
+                return
             } else {
+                self.userInputs.keyword = trimmedKeyword
                 if locationSwitch.isOn {
                     //check zipcode input
                     if let zipcodeInput: String = zipcodeField.text {
                         let trimmedZipcode = zipcodeInput.trimmingCharacters(in: .whitespacesAndNewlines)
                         if trimmedZipcode == "" || trimmedZipcode.count == 0 {
                             self.view.makeToast("Zipcode is Mandatory")
+                            self.userInputs.zipcode = ""
+                            return
+                        } else {
+                            self.userInputs.zipcode = trimmedZipcode
                         }
                     }
                 }
+                //distance
+                self.userInputs.distance = distanceMiles.text == "" ? "10" : distanceMiles.text!
             }
         }
+        print("prepare for segue")
+        performSegue(withIdentifier: "goToProductResults", sender: self)
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToProductResults" {
+            let secondVC = segue.destination as! productViewController
+            
+            secondVC.userInputData = self.userInputs
+            secondVC.delegate = self
+        }
+    }
+    
+    func dataReceived(data: userInput) {
+        print("received")
+    }
+    
     
     //clear the input fields / set to default
     @IBAction func clearFunc(_ sender: UIButton) {
@@ -283,26 +308,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if sender.tag == 0 {
             if (sender.currentImage?.isEqual(UIImage(named: "checked")))! {
                 sender.setImage(UIImage(named: "unchecked"), for: .normal)
-                conditionButton.newChecked = 1
+                self.conditionButton.newChecked = 0
             } else {
                 sender.setImage(UIImage(named: "checked"), for: .normal)
-                conditionButton.newChecked = 0
+                self.conditionButton.newChecked = 1
             }
         } else if sender.tag == 1 {
             if (sender.currentImage?.isEqual(UIImage(named: "checked")))! {
                 sender.setImage(UIImage(named: "unchecked"), for: .normal)
-                conditionButton.usedChecked = 1
+                self.conditionButton.usedChecked = 0
             } else {
                 sender.setImage(UIImage(named: "checked"), for: .normal)
-                conditionButton.usedChecked = 0
+                self.conditionButton.usedChecked = 1
             }
         } else if sender.tag == 2 {
             if (sender.currentImage?.isEqual(UIImage(named: "checked")))! {
                 sender.setImage(UIImage(named: "unchecked"), for: .normal)
-                conditionButton.unspecChecked = 1
+                self.conditionButton.unspecChecked = 0
             } else {
                 sender.setImage(UIImage(named: "checked"), for: .normal)
-                conditionButton.usedChecked = 0
+                self.conditionButton.unspecChecked = 1
             }
         }
     }
@@ -313,29 +338,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if sender.tag == 3 {
             if (sender.currentImage?.isEqual(UIImage(named: "checked")))! {
                 sender.setImage(UIImage(named: "unchecked"), for: .normal)
-                conditionButton.pickupChecked = 1
+                self.conditionButton.pickupChecked = 0
             } else {
                 sender.setImage(UIImage(named: "checked"), for: .normal)
-                conditionButton.pickupChecked = 0
+                self.conditionButton.pickupChecked = 1
             }
         } else if sender.tag == 4 {
             if (sender.currentImage?.isEqual(UIImage(named: "checked")))! {
                 sender.setImage(UIImage(named: "unchecked"), for: .normal)
-                conditionButton.freeShipping = 1
+                self.conditionButton.freeShipping = 0
             } else {
                 sender.setImage(UIImage(named: "checked"), for: .normal)
-                conditionButton.freeShipping = 0
+                self.conditionButton.freeShipping = 1
             }
         }
     }
     
 
+
     
-    //Write didFailWithError
-    
-    //Change City Delegate
-    
-    //Write PrepareForSegue
     
     
 }

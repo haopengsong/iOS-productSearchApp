@@ -15,6 +15,6 @@ class userInput {
     
     var buttonStatus = ButtonStatusModel()
     
-    var distance: Int = 0
+    var distance: String = ""
     var zipcode: String = ""
 }

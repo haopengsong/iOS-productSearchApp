@@ -110,6 +110,9 @@
                                 <state key="normal" title="Button" image="unchecked">
                                     <color key="titleColor" red="0.99953407049999998" green="0.98835557699999999" blue="0.47265523669999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="shippingButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dG8-Dx-rcA"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fW8-LU-FlH">
                                 <rect key="frame" x="126" y="413" width="33" height="34"/>
@@ -235,11 +238,12 @@
                         <outlet property="tbZipcode" destination="iZ8-K6-Dlo" id="HKg-7o-4WN"/>
                         <outlet property="wishList" destination="XH0-2w-EIp" id="RJ3-Qd-UPf"/>
                         <outlet property="zipcodeField" destination="Kkt-aC-1Ao" id="5sX-MR-zNo"/>
+                        <segue destination="MY7-TW-msK" kind="show" identifier="goToProductResults" id="GCq-mC-8as"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-401" y="-39"/>
+            <point key="canvasLocation" x="-234" y="-505"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WIB-Rf-zFi">
@@ -249,6 +253,9 @@
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NqW-y8-zxp">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="JyQ-xG-kif"/>
                     </connections>
@@ -270,7 +277,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0iq-K9-6hv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="230" y="-39"/>
+            <point key="canvasLocation" x="-234" y="290"/>
         </scene>
     </scenes>
     <resources>
