@@ -291,13 +291,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if let text: String = categoryTextField?.text {
                 print("selection : " + text)
                 //userinput: category selection
-                self.userInputs.category = text
+                self.setCategory(entry: text)
+                //self.userInputs.category = text
             }
         }
         categoryTextField.textFieldWillBeginEditingHandler = { [weak categoryTextField] (selections) in
             if categoryTextField?.text == "" {
                 categoryTextField?.text = selections[0]
             }
+        }
+    }
+    /*let pickerData: [[String]] =
+     [["All", "Art", "Baby", "Books", "Clothing, Shoes & Accessories",
+     "Computers/Tablets & Networking", "Health & Beauty", "Music", "Video Games & Consoles"]]
+     */
+    func setCategory(entry: String) {
+        if entry == "All" {
+            self.userInputs.category = ""
+        } else if entry == "Art" {
+            self.userInputs.category = "550"
+        } else if entry == "Baby" {
+            self.userInputs.category = "2984"
+        } else if entry == "Books" {
+            self.userInputs.category = "267"
+        } else if entry == "Clothing, Shoes & Accessories" {
+            self.userInputs.category = "11450"
+        } else if entry == "Computers/Tablets & Networking" {
+            self.userInputs.category = "58058"
+        } else if entry == "Health & Beauty" {
+            self.userInputs.category = "26395"
+        } else if entry == "Music" {
+            self.userInputs.category = "11233"
+        } else {
+            self.userInputs.category = "1249"
         }
     }
     
