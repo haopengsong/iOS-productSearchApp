@@ -12,12 +12,13 @@ import Alamofire
 import SwiftyJSON
 import McPicker
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     //? -> optional
     //! -> always has a value
     //constants
     let ipAPI = "http://ip-api.com/json"
     let pickerData: [[String]] = [["All", "Art", "Baby", "Books", "Clothing, Shoes & Accessories", "Computers/Tablets & Networking", "Health & Beauty", "Music", "Video Games & Consoles"]]
+    let serverZip = "http://571webhw7nodejs-env.myyyz4mkdb.us-west-2.elasticbeanstalk.com/api/zipauto/"
 
     @IBOutlet weak var wishList: UISegmentedControl!
     @IBOutlet weak var searchView: UISegmentedControl!
@@ -66,31 +67,64 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.getLocationZIPCODE()
         self.getCategory();
         
-        //autocomplete
-        zipList.append("test1")
-        zipList.append("test2")
-        zipList.append("test3")
+        //placeholder
+        categoryTextField.placeholder = "All"
+        distanceMiles.placeholder = "10"
+        zipcodeField.placeholder = "Zipcode"
         
-        for str in zipList {
-            tempzipList.append(str)
-        }
+        //autocomplete test
+//        zipList.append("test1")
+//        zipList.append("test2")
+//        zipList.append("test3")
+//        zipList.append("test4")
         
+//        for str in zipList {
+//            tempzipList.append(str)
+//        }
+//
         tbZipcode.delegate = self
         tbZipcode.dataSource = self
         
+        zipcodeField.delegate = self
         zipcodeField.addTarget(self, action: #selector(searchRecords(_ :)), for: .editingChanged)
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
     }
     
-    //search table elements
+    //search for zipcode, call zipcode api
     @objc func searchRecords(_ textField: UITextField) {
+        var zipPrefix = textField.text
+        let range = NSRange(location: 0, length: zipPrefix!.utf16.count)
+        let regex = try! NSRegularExpression(pattern: "^[0-9]{3,5}$")
         
+        if regex.firstMatch(in: zipPrefix!, options: [], range: range) != nil {
+            //call zipcode api
+            self.zipList.removeAll()
+            Alamofire.request(serverZip + zipPrefix!, method: .get).responseJSON {
+                response in
+                if response.result.isSuccess {
+                    let zipcodeJSON: JSON = JSON(response.result.value!)
+                    print(zipcodeJSON)
+                    let zipcodesArr = zipcodeJSON["postalCodes"]
+                    for (_, subJson):(String, JSON) in zipcodesArr {
+                        self.zipList.append(subJson["postalCode"].stringValue)
+                    }
+                }
+                self.tbZipcode.reloadData()
+                self.tbZipcode.frame.size.height = 150
+            }
+        }
     }
     
     //UItableViewDatasource
+    //how many cells
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return zipList.count
     }
     
+    //create those cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "zipcode")
         if cell == nil {
@@ -100,12 +134,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell!
     }
     
-    @IBAction func searchFunc(_ sender: Any) {
-        
+    @IBAction func searchFunc(_ sender: UIButton) {
+        print(sender.tag)
     }
     
-    @IBAction func clearFunc(_ sender: Any) {
-        
+    @IBAction func clearFunc(_ sender: UIButton) {
+        print(sender.tag)
     }
     
     //hide/show zipcode input field
