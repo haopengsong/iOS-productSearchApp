@@ -47,6 +47,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var zipcode: String = ""
     
+    //wishlist
+    var wishLists : [Product] = []
+    
     //userInput
     var userInputs = userInput()
     
